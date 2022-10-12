@@ -1,25 +1,135 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import {
+  Routes,
+  Route,
+  // Link,
+  NavLink,
+  // useParams,
+  useNavigate,
+  // useParams,
+} from 'react-router-dom'
 
-function App() {
+import Home from './components/Home'
+import RecipeList from './components/RecipeList'
+import Recipe from './components/Recipe'
+import Blog from './components/Blog'
+import About from './components/About'
+import Footer from './components/Footer'
+
+import './App.css'
+import {
+  Container,
+  StyledNav,
+  StyledNavLinks,
+} from './components/styles/StyledContainers.styled'
+import {} from './components/styles/StyledLinks.styled'
+
+import { NavHeader } from './components/styles/StyledText.styled'
+
+// import { useField } from './hooks'
+
+const App = () => {
+  const [recipes, setRecipes] = useState([])
+  const [filter, setFilter] = useState('')
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    axios.get(`https://daphnes.fly.dev/api/recipes`).then((response) => {
+      setRecipes(response.data)
+    })
+  }, [])
+
+  const filteredRecipes = recipes
+    .map((r) => ({
+      ...r,
+      ingredients: r.ingredients.filter((i) =>
+        i.name.toLowerCase().includes(filter.toLowerCase())
+      ),
+    }))
+    .filter((obj) => obj.ingredients.length > 0)
+  // returns array of objects whose 'ingredients' array isn't empty after filtering
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value)
+  }
+
+  const getRandomRecipe = () => {
+    const id = recipes[Math.floor(Math.random() * (recipes.length - 1))].id
+    navigate(`/recipes/${id}`)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Container>
+      <StyledNav>
+        <NavHeader>Daphne's</NavHeader>
+        <StyledNavLinks>
+          <NavLink
+            to="/home"
+            style={({ isActive }) => ({
+              fontWeight: isActive ? 700 : 400,
+              borderBottom: isActive ? '1px solid #fff' : 'none',
+              paddingBottom: '0.5rem',
+            })}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/recipes"
+            style={({ isActive }) => ({
+              fontWeight: isActive ? 700 : 400,
+              borderBottom: isActive ? '1px solid #fff' : 'none',
+              paddingBottom: '0.5rem',
+            })}
+          >
+            Recipes
+          </NavLink>
+          <NavLink
+            to="/blog"
+            style={({ isActive }) => ({
+              fontWeight: isActive ? 700 : 400,
+              borderBottom: isActive ? '1px solid #fff' : 'none',
+              paddingBottom: '0.5rem',
+            })}
+          >
+            Blog
+          </NavLink>
+          <NavLink
+            to="/about"
+            style={({ isActive }) => ({
+              fontWeight: isActive ? 700 : 400,
+              borderBottom: isActive ? '1px solid #fff' : 'none',
+              paddingBottom: '0.5rem',
+            })}
+          >
+            About
+          </NavLink>
+        </StyledNavLinks>
+      </StyledNav>
+
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route
+          path="/recipes/:id"
+          element={<Recipe recipes={filteredRecipes} />}
+        />
+        <Route
+          path="/recipes"
+          element={
+            <RecipeList
+              recipes={filteredRecipes}
+              filter={filter}
+              handler={handleFilterChange}
+            />
+          }
+        />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+      <Footer handler={getRandomRecipe} />
+    </Container>
+  )
 }
 
-export default App;
+export default App
