@@ -9,9 +9,12 @@ export const Container = styled.div`
   color: #ffffff;
   font-style: normal;
   max-width: 144rem;
+  min-height: 100vh;
   padding: 4rem 8.4rem;
   margin: 0 auto;
   background-color: #1c1c1c;
+  display: flex;
+  flex-direction: column;
 `
 
 export const BodyContainer = styled.div`
@@ -62,6 +65,7 @@ export const StyledNavLinks = styled.div`
 export const StyledFooter = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: auto;
 `
 
 // PAGE SPECIFIC

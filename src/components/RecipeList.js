@@ -1,13 +1,14 @@
 import Filter from './Filter'
 import {
   BodyContainer,
-  RecipeListContainer, SearchBar
+  RecipeListContainer,
+  SearchBar,
 } from './styles/StyledContainers.styled'
 import { Title, StyledThumbnailText } from './styles/StyledText.styled'
 import { StyledRecipeLink } from './styles/StyledLinks.styled'
 import { ThumbnailImg } from './styles/StyledImages.styled'
 
-const RecipeList = ({ recipes, handler, filter }) => {
+const RecipeList = ({ filteredRecipes, handler, filter }) => {
   return (
     // <PageContainer>
     <BodyContainer>
@@ -16,7 +17,7 @@ const RecipeList = ({ recipes, handler, filter }) => {
         <Filter filter={filter} handler={handler} />
       </SearchBar>
       <RecipeListContainer>
-        {recipes.map((recipe) => (
+        {filteredRecipes.map((recipe) => (
           // <div key={recipe.id}>
           <StyledRecipeLink key={recipe.id} to={`/recipes/${recipe.id}`}>
             <ThumbnailImg src={`/imgs/${recipe.imageCover}`} alt="cocktail" />

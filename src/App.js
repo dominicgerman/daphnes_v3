@@ -32,6 +32,8 @@ import { NavHeader } from './components/styles/StyledText.styled'
 const App = () => {
   const [recipes, setRecipes] = useState([])
   const [filter, setFilter] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchResults, setSearchResults] = useState([])
 
   const navigate = useNavigate()
 
@@ -41,7 +43,18 @@ const App = () => {
     })
   }, [])
 
-  const filteredRecipes = recipes
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      axios
+        .get(`https://daphnes.fly.dev/api/search/${searchTerm}`)
+        .then((response) => {
+          setSearchResults(response.data.data)
+          console.log('effect fired!')
+        })
+    }
+  }, [searchTerm])
+
+  let filteredRecipes = recipes
     .map((r) => ({
       ...r,
       ingredients: r.ingredients.filter((i) =>
@@ -59,6 +72,14 @@ const App = () => {
     const id = recipes[Math.floor(Math.random() * (recipes.length - 1))].id
     navigate(`/recipes/${id}`)
   }
+
+  const handleTagClick = (tag) => {
+    setSearchTerm(tag)
+  }
+
+  filteredRecipes = searchResults.length > 0 ? searchResults : filteredRecipes
+  console.log(searchResults)
+  console.log(filteredRecipes)
 
   return (
     <Container>
@@ -112,13 +133,20 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route
           path="/recipes/:id"
-          element={<Recipe recipes={filteredRecipes} />}
+          element={
+            <Recipe
+              handleTagClick={handleTagClick}
+              filteredRecipes={filteredRecipes}
+              recipes={recipes}
+            />
+          }
         />
         <Route
           path="/recipes"
           element={
             <RecipeList
-              recipes={filteredRecipes}
+              filteredRecipes={filteredRecipes}
+              recipes={recipes}
               filter={filter}
               handler={handleFilterChange}
             />

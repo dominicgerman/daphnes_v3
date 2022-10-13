@@ -8,7 +8,7 @@ import {
 } from '../styles/StyledContainers.styled'
 import { TabButton } from '../styles/StyledButtons.styled'
 
-const RecipeTabs = ({ recipe, recipes }) => {
+const RecipeTabs = ({ recipe, recipes, handleTagClick }) => {
   const [activeTab, setActiveTab] = useState('tab1')
 
   return (
@@ -35,7 +35,11 @@ const RecipeTabs = ({ recipe, recipes }) => {
       </TabsContainer>
       <OutletContainer>
         {activeTab === 'tab1' ? (
-          <AboutTab recipes={recipes} recipe={recipe} />
+          <AboutTab
+            handleTagClick={handleTagClick}
+            recipes={recipes}
+            recipe={recipe}
+          />
         ) : null}
         {activeTab === 'tab2' ? (
           <SpecsTab recipes={recipes} recipe={recipe} />

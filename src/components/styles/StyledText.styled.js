@@ -16,6 +16,11 @@ export const Title = styled.h1`
   line-height: 7.7rem;
 `
 
+export const StyledDescription = styled.p`
+  font-size: 2.4rem;
+  margin-bottom: 7rem;
+`
+
 export const StyledParagraph = styled.p`
   font-size: 2rem;
   line-height: 3.2rem;
@@ -25,10 +30,7 @@ export const StyledParagraph = styled.p`
   padding-right: 2rem;
 `
 
-export const StyledDescription = styled.p`
-  font-size: 2.4rem;
-  margin-bottom: 7rem;
-`
+export const StyledTagList = styled.ul``
 
 export const StyledIngredients = styled.ul`
   display: flex;

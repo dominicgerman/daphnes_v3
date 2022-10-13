@@ -21,6 +21,10 @@ export const TabButton = styled.button`
   background-color: #1c1c1c;
   border: none;
   font-family: inherit;
+  cursor: pointer;
+  &:hover {
+    color: #5e5e5e;
+  }
 `
 
 export const FooterButton = styled.button`

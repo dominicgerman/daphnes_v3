@@ -4,7 +4,7 @@ import { FooterButton } from './styles/StyledButtons.styled'
 const Footer = ({ handler }) => {
   return (
     <StyledFooter>
-      <FooterButton onClick={handler}>Dealer's Choice</FooterButton>
+      <FooterButton onClick={handler}> 🎲 &nbsp; Dealer's Choice</FooterButton>
     </StyledFooter>
   )
 }

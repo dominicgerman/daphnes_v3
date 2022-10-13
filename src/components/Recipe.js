@@ -9,7 +9,7 @@ import {
 import { Title, StyledDescription } from './styles/StyledText.styled'
 import { FullSizeImg } from './styles/StyledImages.styled'
 
-const Recipe = ({ recipes }) => {
+const Recipe = ({ recipes, handleTagClick }) => {
   const { id } = useParams()
   const recipe = recipes.find((r) => r.id === id)
 
@@ -22,7 +22,11 @@ const Recipe = ({ recipes }) => {
       <StyledDescription>{recipe?.description}</StyledDescription>
       <ContentContainer>
         <RecipeTextContainer>
-          <RecipeTabs recipes={recipes} recipe={recipe} />
+          <RecipeTabs
+            recipes={recipes}
+            recipe={recipe}
+            handleTagClick={handleTagClick}
+          />
         </RecipeTextContainer>
         <FullSizeImg src={`/imgs/${recipe?.imageCover}`} alt="daphne the cat" />
       </ContentContainer>
