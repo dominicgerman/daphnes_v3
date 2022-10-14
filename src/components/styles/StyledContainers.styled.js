@@ -50,7 +50,7 @@ export const StyledNav = styled.nav`
   margin-bottom: 3rem;
 `
 
-export const StyledNavLinks = styled.div`
+export const StyledNavLinksContainer = styled.div`
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 1.9rem;
@@ -69,6 +69,52 @@ export const StyledFooter = styled.div`
 `
 
 // PAGE SPECIFIC
+
+export const HomeContainer = styled.div`
+  max-width: 144rem;
+  grid-template-rows: 1fr 2fr;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  column-gap: 2.4rem;
+  margin: 0 auto;
+  display: grid;
+`
+
+export const StyledModal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 50%;
+
+  background-color: white;
+  z-index: 10;
+
+  font-size: 3rem;
+  padding: 8rem;
+`
+
+export const StyledOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 5;
+`
+
+export const MenuContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+`
+
+export const MenuList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+`
 
 export const RecipeListContainer = styled.div`
   display: grid;

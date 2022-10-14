@@ -5,4 +5,5 @@ export const ThumbnailImg = styled.img`
 `
 export const FullSizeImg = styled.img`
   max-width: 40rem;
+  max-height: 53.4rem;
 `

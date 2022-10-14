@@ -21,9 +21,9 @@ import './App.css'
 import {
   Container,
   StyledNav,
-  StyledNavLinks,
+  StyledNavLinksContainer,
 } from './components/styles/StyledContainers.styled'
-import {} from './components/styles/StyledLinks.styled'
+import { StyledNavLink } from './components/styles/StyledLinks.styled'
 
 import { NavHeader } from './components/styles/StyledText.styled'
 
@@ -34,6 +34,7 @@ const App = () => {
   const [filter, setFilter] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
+  const [show, setShow] = useState(false)
 
   const navigate = useNavigate()
 
@@ -64,6 +65,8 @@ const App = () => {
     .filter((obj) => obj.ingredients.length > 0)
   // returns array of objects whose 'ingredients' array isn't empty after filtering
 
+  const menuItems = recipes.filter((r) => r.menuItem)
+
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
   }
@@ -78,59 +81,30 @@ const App = () => {
   }
 
   filteredRecipes = searchResults.length > 0 ? searchResults : filteredRecipes
-  console.log(searchResults)
-  console.log(filteredRecipes)
 
   return (
     <Container>
       <StyledNav>
         <NavHeader>Daphne's</NavHeader>
-        <StyledNavLinks>
-          <NavLink
-            to="/home"
-            style={({ isActive }) => ({
-              fontWeight: isActive ? 700 : 400,
-              borderBottom: isActive ? '1px solid #fff' : 'none',
-              paddingBottom: '0.5rem',
-            })}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/recipes"
-            style={({ isActive }) => ({
-              fontWeight: isActive ? 700 : 400,
-              borderBottom: isActive ? '1px solid #fff' : 'none',
-              paddingBottom: '0.5rem',
-            })}
-          >
-            Recipes
-          </NavLink>
-          <NavLink
-            to="/blog"
-            style={({ isActive }) => ({
-              fontWeight: isActive ? 700 : 400,
-              borderBottom: isActive ? '1px solid #fff' : 'none',
-              paddingBottom: '0.5rem',
-            })}
-          >
-            Blog
-          </NavLink>
-          <NavLink
-            to="/about"
-            style={({ isActive }) => ({
-              fontWeight: isActive ? 700 : 400,
-              borderBottom: isActive ? '1px solid #fff' : 'none',
-              paddingBottom: '0.5rem',
-            })}
-          >
-            About
-          </NavLink>
-        </StyledNavLinks>
+        <StyledNavLinksContainer>
+          <StyledNavLink to="/home">Home</StyledNavLink>
+          <StyledNavLink to="/recipes">Recipes</StyledNavLink>
+          <StyledNavLink to="/blog">Blog</StyledNavLink>
+          <StyledNavLink to="/about">About</StyledNavLink>
+        </StyledNavLinksContainer>
       </StyledNav>
 
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <Home
+              show={show}
+              toggleShow={() => setShow(!show)}
+              menuItems={menuItems}
+            />
+          }
+        />
         <Route
           path="/recipes/:id"
           element={

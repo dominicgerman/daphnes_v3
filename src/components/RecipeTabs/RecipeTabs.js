@@ -16,19 +16,19 @@ const RecipeTabs = ({ recipe, recipes, handleTagClick }) => {
       <TabsContainer>
         <TabButton
           onClick={() => setActiveTab('tab1')}
-          className={activeTab === 'tab1' ? 'active' : ''}
+          className={activeTab === 'tab1' ? 'activeTab' : ''}
         >
           About
         </TabButton>
         <TabButton
           onClick={() => setActiveTab('tab2')}
-          className={activeTab === 'tab2' ? 'active' : ''}
+          className={activeTab === 'tab2' ? 'activeTab' : ''}
         >
           Recipe
         </TabButton>
         <TabButton
           onClick={() => setActiveTab('tab3')}
-          className={activeTab === 'tab3' ? 'active' : ''}
+          className={activeTab === 'tab3' ? 'activeTab' : ''}
         >
           Similar to
         </TabButton>

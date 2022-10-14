@@ -6,7 +6,7 @@ span {
   text-decoration: underline;
 }
 
-.active {
+.activeTab {
   border-bottom: 0.3rem solid #fff !important;
   padding-bottom: 1rem;
 }

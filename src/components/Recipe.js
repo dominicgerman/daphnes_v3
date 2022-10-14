@@ -28,7 +28,7 @@ const Recipe = ({ recipes, handleTagClick }) => {
             handleTagClick={handleTagClick}
           />
         </RecipeTextContainer>
-        <FullSizeImg src={`/imgs/${recipe?.imageCover}`} alt="daphne the cat" />
+        <FullSizeImg src={`/imgs/${recipe?.imageCover}`} alt="cocktail" />
       </ContentContainer>
     </BodyContainer>
   )
