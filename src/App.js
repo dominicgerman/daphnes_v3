@@ -96,6 +96,17 @@ const App = () => {
 
       <Routes>
         <Route
+          exact
+          path="/"
+          element={
+            <Home
+              show={show}
+              toggleShow={() => setShow(!show)}
+              menuItems={menuItems}
+            />
+          }
+        />
+        <Route
           path="/home"
           element={
             <Home

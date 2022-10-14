@@ -22,7 +22,9 @@ const Modal = ({ menuItems, toggleShow }) => {
           <MenuList>
             {menuItems?.map((r) => (
               <li key={r.id}>
-                <MenuItemLink to={`/recipes/${r.id}`}>{r.name}</MenuItemLink>
+                <MenuItemLink onClick={toggleShow} to={`/recipes/${r.id}`}>
+                  {r.name}
+                </MenuItemLink>
                 <MenuItemDescription>{r.menuDescription}</MenuItemDescription>
               </li>
             ))}
